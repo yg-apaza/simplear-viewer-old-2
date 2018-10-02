@@ -36,7 +36,7 @@ public abstract class FrameworkController : MonoBehaviour
             return;
         }
 
-        ResourceCreated(Resource.FromDataSnapshot(args.Snapshot));
+        AddResource(Resource.FromDataSnapshot(args.Snapshot));
         // TODO: Write preview resource to true
     }
     
@@ -48,30 +48,44 @@ public abstract class FrameworkController : MonoBehaviour
             return;
         }
 
-        //Debug.Log((string) args.Snapshot.Key);
+        Interactions interactions = new Interactions(null);
+        JsonUtility.FromJsonOverwrite((string) args.Snapshot.Value, interactions);
+        UpdateInteractions(interactions.interactions);
     }
-
-    /**
-     * Every class which implements this should call this method when the
-     * framework is ready
-     **/
-    //public void SendReadyMessage()
-    //{
-    //    //Controller.eventManager.Send(new ViewerEvent.FrameworkReady(ViewerEvent.FRAMEWORK_READY));
-    //}
 
     public abstract void Setup();
 
-    //public void ResourcesSetup(Resource[] resources)
-    //{
-    //    foreach (Resource r in resources)
-    //    {
-    //        ResourceCreated(r);
-    //    }
-    //    //Controller.eventManager.Send(new ViewerEvent.ResourcesInitialized(ViewerEvent.RESOURCES_INITIALIZED));
-    //}
+    public void AddResource(Resource resource)
+    {
+        // TODO: Use static strings or enums
+        switch (resource.type)
+        {
+            case "pfmarker":
+                AddPredefinedFiducialMarkerResource(resource);
+                break;
+            case "pnmarker":
+                AddPredefinedNaturalMarkerResource(resource);
+                break;
+            case "poly":
+                AddPolyResource(resource);
+                break;
+        }
+    }
 
-    public void InteractionsApproved(Interaction[] interactions)
+    public abstract void AddPredefinedFiducialMarkerResource(Resource resource);
+
+    public abstract void AddPredefinedNaturalMarkerResource(Resource resource);
+
+    public void AddPolyResource(Resource resource)
+    {
+        PolyUtil.GetPolyResult(resource.content, (polyResult) =>
+        {
+            resources.Add(resource.id, resource);
+            gameObjectresources.Add(resource.id, polyResult);
+        });
+    }
+
+    public void UpdateInteractions(Interaction[] interactions)
     {
         RestoreResources();
         foreach (Interaction i in interactions)
@@ -104,43 +118,10 @@ public abstract class FrameworkController : MonoBehaviour
 
     public abstract void MarkerIsDetected_AugmentResource(string[] event_inputs, string[] action_inputs);
 
-    public abstract void InteractionsRejected();
-
-    public void ResourceCreated(Resource resource)
-    {
-        // TODO: Use static strings or enums
-        switch (resource.type)
-        {
-            case "pfmarker":
-                AddPredefinedFiducialMarkerResource(resource);
-                break;
-            case "pnmarker":
-                AddPredefinedNaturalMarkerResource(resource);
-                break;
-            case "poly":
-                AddPolyResource(resource);
-                break;
-        }
-    }
-
-    public abstract void AddPredefinedFiducialMarkerResource(Resource resource);
-
-    public abstract void AddPredefinedNaturalMarkerResource(Resource resource);
-
-    public void AddPolyResource(Resource resource)
-    {
-        PolyUtil.GetPolyResult(resource.content, (polyResult) =>
-        {
-            resources.Add(resource.id, resource);
-            gameObjectresources.Add(resource.id, polyResult);
-        });
-    }
-
     void OnDisable()
     {
         resourcesReference.ChildAdded -= ResourceAdded;
         interactionsReference.ValueChanged -= InteractionsChanged;
         // TODO: Set locked to false
     }
-
 }
