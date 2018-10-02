@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="tree" size="1000.000000 1000.000000" />
+    <ImageTarget name="stones" size="1000.000000 1000.000000" />
+    <ImageTarget name="house" size="1000.000000 1000.000000" />
+    <ImageTarget name="fruits" size="1000.000000 1000.000000" />
+    <ImageTarget name="earth" size="1000.000000 1000.000000" />
+    <ImageTarget name="chess" size="1000.000000 1000.000000" />
+    <ImageTarget name="chemistry" size="1000.000000 1000.000000" />
+    <ImageTarget name="cat" size="1000.000000 1000.000000" />
+  </Tracking>
+</QCARConfig>

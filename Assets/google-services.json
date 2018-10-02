@@ -1,0 +1,125 @@
+{
+  "project_info": {
+    "project_number": "678146306977",
+    "firebase_url": "https://simplear-e9683.firebaseio.com",
+    "project_id": "simplear-e9683",
+    "storage_bucket": "simplear-e9683.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678146306977:android:4dc85e1a13ced0a2",
+        "android_client_info": {
+          "package_name": "pe.edu.unsa.epis.simplear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678146306977-52emef6u2tn695isau5ctk6t5hm61ceg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.unsa.epis.simplear",
+            "certificate_hash": "ed067857ec810149ed2de8fd1113fc12de05f85e"
+          }
+        },
+        {
+          "client_id": "678146306977-j9k96d4h32191dp4skiit0enhm61iotc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.unsa.epis.simplear",
+            "certificate_hash": "cdb2293e75885641593c493d719fb93d007e4816"
+          }
+        },
+        {
+          "client_id": "678146306977-p32uvqqj2fi5sn7lro3k1me2o727857i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvAVJPr_srQIr4d0m2wdoC8RK7uBlDE0s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678146306977-p32uvqqj2fi5sn7lro3k1me2o727857i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678146306977:android:5947b5a3bda2664d",
+        "android_client_info": {
+          "package_name": "pe.edu.unsa.epis.simplear.editor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678146306977-p32uvqqj2fi5sn7lro3k1me2o727857i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvAVJPr_srQIr4d0m2wdoC8RK7uBlDE0s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678146306977:android:6ee3f68423bf1f38",
+        "android_client_info": {
+          "package_name": "pe.edu.unsa.epis.simplear.viewer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678146306977-p32uvqqj2fi5sn7lro3k1me2o727857i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvAVJPr_srQIr4d0m2wdoC8RK7uBlDE0s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

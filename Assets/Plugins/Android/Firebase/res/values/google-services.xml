@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+  <string name="firebase_database_url" translatable="false">https://simplear-e9683.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">678146306977</string>
+  <string name="google_storage_bucket" translatable="false">simplear-e9683.appspot.com</string>
+  <string name="project_id" translatable="false">simplear-e9683</string>
+  <string name="google_api_key" translatable="false">AIzaSyCvAVJPr_srQIr4d0m2wdoC8RK7uBlDE0s</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCvAVJPr_srQIr4d0m2wdoC8RK7uBlDE0s</string>
+  <string name="google_app_id" translatable="false">1:678146306977:android:4dc85e1a13ced0a2</string>
+  <string name="default_web_client_id" translatable="false">678146306977-p32uvqqj2fi5sn7lro3k1me2o727857i.apps.googleusercontent.com</string>
+</resources>
