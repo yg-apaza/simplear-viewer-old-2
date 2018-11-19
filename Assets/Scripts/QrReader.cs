@@ -47,18 +47,30 @@ public class QrReader : MonoBehaviour
         {
             try
             {
-                Image cameraFeed = CameraDevice.Instance.GetCameraImage(Image.PIXEL_FORMAT.RGBA8888);
+                //Image cameraFeed = CameraDevice.Instance.GetCameraImage(Image.PIXEL_FORMAT.GRAYSCALE);
+                if (CameraDevice.Instance.SetFrameFormat(Image.PIXEL_FORMAT.GRAYSCALE, true))
+                {
+                    Debug.Log("Successfully registered pixel format ");
+                }
+                else
+                {
+                    Debug.LogError("Failed to register pixel format:");
+                    return;
+                }
+
+                Image cameraFeed = CameraDevice.Instance.GetCameraImage(Image.PIXEL_FORMAT.GRAYSCALE);
                 if (cameraFeed == null)
                 {
                     return;
                 }
-                Result data = barCodeReader.Decode(cameraFeed.Pixels, cameraFeed.BufferWidth, cameraFeed.BufferHeight, RGBLuminanceSource.BitmapFormat.RGB32);
+                Result data = barCodeReader.Decode(cameraFeed.Pixels, cameraFeed.BufferWidth, cameraFeed.BufferHeight, RGBLuminanceSource.BitmapFormat.Gray8);
                 if (data != null)
                 {
                     // TODO: Handle when preview doesn't exists or an invalid text from QR Code was detected
                     FirebaseDatabase.DefaultInstance
                         .GetReference("previews/" + data.Text)
-                        .GetValueAsync().ContinueWith(task => {
+                        .GetValueAsync().ContinueWith(task =>
+                        {
                             if (task.IsFaulted)
                             {
                                 // TODO: Handle the error...
@@ -75,7 +87,7 @@ public class QrReader : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message);
+                Debug.Log("Error: " + e.Message);
             }
         }
     }

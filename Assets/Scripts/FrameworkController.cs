@@ -7,21 +7,29 @@ public abstract class FrameworkController : MonoBehaviour
     protected Dictionary<string, GameObject> gameObjectresources = new Dictionary<string, GameObject>();
     protected Dictionary<string, Resource> resources = new Dictionary<string, Resource>();
 
-    DatabaseReference resourcesReference = FirebaseDatabase.DefaultInstance.GetReference("resources").Child(Project.id);
-    DatabaseReference interactionsReference = FirebaseDatabase.DefaultInstance.GetReference("interactions").Child(Project.id);
-    DatabaseReference previewsResourcesReference = FirebaseDatabase.DefaultInstance.GetReference("previews").Child(Project.previewId).Child("resources");
+    DatabaseReference resourcesReference;
+    DatabaseReference interactionsReference;
+    DatabaseReference previewsReference;
 
     void OnEnable()
     {
-        resourcesReference.ChildAdded += ResourceAdded;
-        interactionsReference.ValueChanged += InteractionsChanged;
+        //resourcesReference.ChildAdded += ResourceAdded;
+        //interactionsReference.ValueChanged += InteractionsChanged;
     }
 
     void Start()
     {
         /**
-         * Locking the preview
-         **/
+        * Locking the preview
+        **/
+
+        resourcesReference = FirebaseDatabase.DefaultInstance.GetReference("resources").Child(Project.id);
+        interactionsReference = FirebaseDatabase.DefaultInstance.GetReference("interactions").Child(Project.id);
+        previewsReference = FirebaseDatabase.DefaultInstance.GetReference("previews").Child(Project.previewId);
+
+        resourcesReference.ChildAdded += ResourceAdded;
+        interactionsReference.ValueChanged += InteractionsChanged;
+
         FirebaseDatabase.DefaultInstance
             .GetReference("previews").Child(Project.previewId).Child("locked").SetValueAsync(true);
 
@@ -72,6 +80,9 @@ public abstract class FrameworkController : MonoBehaviour
         }
     }
 
+    /**
+     * Always call UpdatePreviewResource(resourceId) after adding a resource
+     **/
     public abstract void AddPredefinedFiducialMarkerResource(Resource resource);
 
     public abstract void AddPredefinedNaturalMarkerResource(Resource resource);
@@ -82,7 +93,13 @@ public abstract class FrameworkController : MonoBehaviour
         {
             resources.Add(resource.id, resource);
             gameObjectresources.Add(resource.id, polyResult);
+            UpdatePreviewResource(resource.id);
         });
+    }
+
+    public void UpdatePreviewResource(string resourceId)
+    {
+        previewsReference.Child("resources").Child(resourceId).SetValueAsync(true);
     }
 
     public void UpdateInteractions(Interaction[] interactions)
@@ -122,6 +139,6 @@ public abstract class FrameworkController : MonoBehaviour
     {
         resourcesReference.ChildAdded -= ResourceAdded;
         interactionsReference.ValueChanged -= InteractionsChanged;
-        // TODO: Set locked to false
+        previewsReference.Child("locked").SetValueAsync(false);
     }
 }

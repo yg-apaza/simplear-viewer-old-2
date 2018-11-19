@@ -57,6 +57,8 @@ public class VuforiaController : FrameworkController
 
         resources.Add(resource.id, resource);
         gameObjectresources.Add(resource.id, tb.gameObject);
+
+        UpdatePreviewResource(resource.id);
         return;
     }
 
